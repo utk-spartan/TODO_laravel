@@ -45,4 +45,15 @@ Route::delete('/tasks',function (\Illuminate\Http\Request $request){
         'id' => $id,
         'state' => '200'
     ]);
+ 
+Route::get('/tasks/get', function () {
+    $tasks = DB::table('tasks')->select('id','task')->get();
+    return response()->json($tasks);
+});
+
+
+Route::get('/tasks/get/{id}', function ($id) {
+    $task = DB::table('tasks')->select('id','task')->where('id',$id)->get();
+    return response()->json($task);
+
 });
