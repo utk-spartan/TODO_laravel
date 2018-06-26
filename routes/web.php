@@ -12,5 +12,27 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return [
+        'message' => 'hello'
+    ];
 });
+
+/*
+Route::delete('/tasks', function () {
+    return view('welcome');
+});*/
+
+
+
+Route::delete('/tasks', function(){
+    //delete task by taskid
+
+
+    //Log::info("deleted application - $id");
+
+    return response()->json([
+        'taskid' =>1 ,
+        'task' => 'something'
+    ]);
+
+})->where('id', '[0-9]+');
