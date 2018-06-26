@@ -37,7 +37,7 @@ Route::patch('/tasks/id',function (\Illuminate\Http\Request $request){
 });
 
 
-Route::delete('/tasks',function (\Illuminate\Http\Request $request){
+Route::delete('/tasks',function (\Illuminate\Http\Request $request) {
     //$input = $request->all();
     $id = $request->input('id');
     DB::table('tasks')->where('id', '=', $id)->delete();
@@ -45,7 +45,8 @@ Route::delete('/tasks',function (\Illuminate\Http\Request $request){
         'id' => $id,
         'state' => '200'
     ]);
- 
+});
+
 Route::get('/tasks/get', function () {
     $tasks = DB::table('tasks')->select('id','task')->get();
     return response()->json($tasks);
@@ -57,3 +58,4 @@ Route::get('/tasks/get/{id}', function ($id) {
     return response()->json($task);
 
 });
+
