@@ -14,3 +14,15 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/tasks/get', function () {
+    $tasks = DB::table('tasks')->select('id','task')->get();
+    return $tasks;
+});
+
+
+Route::get('/tasks/get/{id}', function ($id) {
+    $task = DB::table('tasks')->select('id','task')->where('id',$id)->get();
+    return $task;
+});
