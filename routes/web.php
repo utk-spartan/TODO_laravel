@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::patch('/tasks/',function (){
+    //for updating task file
+    return response()->json([
+        'id' => '2',
+        'state' => 'task'
+    ]);
+    //return view('welcome');
+});
