@@ -14,8 +14,17 @@ class Todo extends Controller
 
     public function delete($id)
     {
-
-        $deletedRows = Tasks::where('id', $id)->delete();
-        return ['no of deleted rows'=> $deletedRows];
+        $tasks = new Tasks();
+        $noOfDeletedRows = $tasks->deleteTask($id);
+        $result = "";
+        if( $noOfDeletedRows === 0)
+        {
+            $result = "deletion failed";
+        }
+        else
+        {
+            $result = "deletion succeded";
+        }
+        return ['result' => $result];
     }
 }
