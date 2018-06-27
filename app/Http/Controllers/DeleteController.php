@@ -15,16 +15,7 @@ class DeleteController extends Controller
     public function delete($id)
     {
         $tasks = new Tasks();
-        $noOfDeletedRows = $tasks->deleteTask($id);
-        $result = "";
-        if( $noOfDeletedRows === 0)
-        {
-            $result = "deletion failed";
-        }
-        else
-        {
-            $result = "deletion succeded";
-        }
-        return ['result' => $result];
+        $message = $tasks->deleteTask($id);
+        return ['message' => $message];
     }
 }
