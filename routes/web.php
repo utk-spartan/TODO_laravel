@@ -12,7 +12,6 @@
 */
 //namespace App\Http\Kernel;
 
-
 Route::post('/tasks', 'PostsController@index');
 
 
@@ -35,15 +34,12 @@ Route::patch('/tasks/id',function (\Illuminate\Http\Request $request){
 });
 
 
-Route::delete('/tasks',function (\Illuminate\Http\Request $request) {
-    //$input = $request->all();
-    $id = $request->input('id');
-    DB::table('tasks')->where('id', '=', $id)->delete();
-    return response()->json([
-        'id' => $id,
-        'state' => '200'
-    ]);
-});
+
+
+
+
+Route::delete('task/{id}', 'DeleteController@delete')->where('id', '[0-9]+');
+
 
 Route::get('/tasks/get', function () {
     $tasks = DB::table('tasks')->select('id','task')->get();
@@ -56,4 +52,5 @@ Route::get('/tasks/get/{id}', function ($id) {
     return response()->json($task);
 
 });
+
 
