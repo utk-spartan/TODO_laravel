@@ -33,16 +33,6 @@ Route::patch('/tasks/id',function (\Illuminate\Http\Request $request){
 });
 
 
-/*Route::delete('/tasks',function (\Illuminate\Http\Request $request){
-    //$input = $request->all();
-    $id = $request->input('id');
-    DB::table('tasks')->where('id', '=', $id)->delete();
-    return response()->json([
-        'id' => $id,
-        'state' => '200'
-    ]);
-});*/
-
 
 
 
