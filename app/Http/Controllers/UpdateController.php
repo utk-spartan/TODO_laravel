@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Http\Controllers\Controller;
-
+use Validator;
 use App\Update;
 use Illuminate\Http\Request;
 
@@ -17,25 +17,24 @@ class UpdateController extends Controller
         //for updating task file
         $id =  $request->input('id');
         $task =  $request->input('task');
-        $tasks = new Update();
-        if($id===null)
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+            'task' => 'required|max:255',
+        ]);
+        if($validator->fails()===true)
         {
-            echo "enter task id to update a task";
+            return response()->json("update operation failed ");
         }
-        else if($task==null)
+        $tasks = new Update;
+
+        if(($tasks->updateTask($id,$task))===0)
         {
-            echo "enter task to update";
+            echo "task id not present";
         }
         else
         {
-            if(($tasks->updateTask($id,$task))===0)
-            {
-                echo "update failed";
-            }
-            else
-            {
-                echo "update success";
-            }
+            echo "update success";
         }
+
     }
 }
