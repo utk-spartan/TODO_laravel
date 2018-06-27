@@ -42,7 +42,7 @@ Route::patch('/tasks/id',function (\Illuminate\Http\Request $request){
 
 
 
-Route::delete('task/{id}', 'Todo@delete')->where('id', '[0-9]+');
+Route::delete('task/{id}', 'DeleteController@delete')->where('id', '[0-9]+');
 
 
 Route::get('/tasks/get', function () {

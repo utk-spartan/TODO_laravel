@@ -12,7 +12,7 @@ class Tasks extends Model
 
     public function deleteTask($id)
     {
-        return $this::where('id', $id) -> delete();
+        return self::where('id', $id) -> delete();
     }
 
 }

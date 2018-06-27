@@ -9,7 +9,7 @@ use App\Tasks;
 
 
 
-class Todo extends Controller
+class DeleteController extends Controller
 {
 
     public function delete($id)
