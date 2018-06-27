@@ -16,4 +16,4 @@ Route::post('/tasks', 'PostsController@index');
 Route::delete('task/{id}', 'DeleteController@delete')->where('id', '[0-9]+');
 Route::get('/task/{id}', 'GetController@get')->where('id', '[0-9]+');
 Route::get('/tasks', 'GetController@getall');
-Route::patch('/task/update', 'UpdateController@update');
+Route::patch('/task/{id}', 'UpdateController@update')->where('id', '[0-9]+');
