@@ -20,10 +20,10 @@ Route::post('/tasks', function (\Illuminate\Http\Request $request) {
 
 });
 
-Route::patch('/tasks/{id?}/{task?}','Todo@update')->where('id','[0-9]+');
+Route::patch('/task/update','UpdateController@update');
 
 
-Route::delete('tasks/{id}', 'Todo@delete')->where('id', '[0-9]+');
+Route::delete('tasks/{id}', 'update@delete')->where('id', '[0-9]+');
 
 
 Route::get('/tasks/get', function () {
