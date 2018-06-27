@@ -37,8 +37,10 @@ Route::patch('/tasks/id', function(\Illuminate\Http\Request $request) {
     //return view('welcome');
 });
 
-Route::delete('tasks/{id}', 'Todo@delete')->where('id', '[0-9]+');
+Route::delete('task/{id}', 'GetController@delete')->where('id', '[0-9]+');
 
-Route::get('/tasks/get/{id?}', 'Todo@get')->where('id', '[0-9]+');
+Route::get('/task/{id?}', 'GetController@get')->where('id', '[0-9]+');
 
+Route::get('/tasks', 'GetController@getall');
 
+Route::post('/tasks', 'PostsController@index');
