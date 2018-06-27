@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,9 +10,15 @@
 |
 */
 //namespace App\Http\Kernel;
+    Route::post('/tasks', 'PostsController@index');
+    Route::delete('task/{id}', 'DeleteController@delete')->where('id', '[0-9]+');
+    Route::get('/tasks/get', function () {
+        $tasks = DB::table('tasks')->select('id','task')->get();
+        return response()->json($tasks);
+    });
+    Route::get('/tasks/get/{id}', function ($id) {
+        $task = DB::table('tasks')->select('id','task')->where('id',$id)->get();
+        return response()->json($task);
+    });
 
-
-
-
-Route::post('/tasks', 'PostsController@index');
-Route::patch('/task/update','UpdateController@update');
+    Route::patch('/task/update','UpdateController@update');
