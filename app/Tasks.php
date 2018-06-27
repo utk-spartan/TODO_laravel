@@ -12,7 +12,28 @@ class Tasks extends Model
 
     public function deleteTask($id)
     {
-        return self::where('id', $id) -> delete();
+        $message = "";
+        $task = $this->Find($id);
+
+        if ($task === NULL)
+        {
+           $message = "id not found";
+        }
+        else
+        {
+            $status = $task->delete();
+            if ($status === 0)
+            {
+                $message = "delete failed";
+            }
+            else
+            {
+                $message = "delete successful";
+            }
+        }
+
+        return $message;
+
     }
 
 }
