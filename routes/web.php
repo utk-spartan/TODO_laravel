@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,46 +10,15 @@
 |
 */
 //namespace App\Http\Kernel;
+    Route::post('/tasks', 'PostsController@index');
+    Route::delete('task/{id}', 'DeleteController@delete')->where('id', '[0-9]+');
+    Route::get('/tasks/get', function () {
+        $tasks = DB::table('tasks')->select('id','task')->get();
+        return response()->json($tasks);
+    });
+    Route::get('/tasks/get/{id}', function ($id) {
+        $task = DB::table('tasks')->select('id','task')->where('id',$id)->get();
+        return response()->json($task);
+    });
 
-Route::post('/tasks', 'PostsController@index');
-
-
-
-
-Route::patch('/tasks/id',function (\Illuminate\Http\Request $request){
-    //for updating task file
-    //$input = $request->all();
-    $id = $name = $request->input('id');
-    $task = $name = $request->input('task');
-    DB::table('tasks')
-        ->where('id', $id)
-        ->update(['task' => $task]);
-    return response()->json([
-        'id' => $id,
-        'task'=>$task,
-        'state' => 'updated'
-    ]);
-    //return view('welcome');
-});
-
-
-
-
-
-
-Route::delete('task/{id}', 'DeleteController@delete')->where('id', '[0-9]+');
-
-
-Route::get('/tasks/get', function () {
-    $tasks = DB::table('tasks')->select('id','task')->get();
-    return response()->json($tasks);
-});
-
-
-Route::get('/tasks/get/{id}', function ($id) {
-    $task = DB::table('tasks')->select('id','task')->where('id',$id)->get();
-    return response()->json($task);
-
-});
-
-
+    Route::patch('/task/update','UpdateController@update');
