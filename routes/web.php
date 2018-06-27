@@ -13,47 +13,32 @@
 //namespace App\Http\Kernel;
 
 Route::post('/tasks', function (\Illuminate\Http\Request $request) {
-    $task = $request->input('task');
-    $inserted=DB::insert('insert into tasks (id, task) values (?, ?)', [NULL, $task]);
+    $task     = $request->input('task');
+    $inserted = DB::insert('insert into tasks (id, task) values (?, ?)', [null, $task]);
 
-        return response()->json($inserted);
+    return response()->json($inserted);
 
 });
 
-Route::patch('/tasks/id',function (\Illuminate\Http\Request $request){
+Route::patch('/tasks/id', function(\Illuminate\Http\Request $request) {
     //for updating task file
     //$input = $request->all();
-    $id = $name = $request->input('id');
+    $id   = $name = $request->input('id');
     $task = $name = $request->input('task');
     DB::table('tasks')
-        ->where('id', $id)
-        ->update(['task' => $task]);
+      ->where('id', $id)
+      ->update(['task' => $task]);
+
     return response()->json([
-        'id' => $id,
-        'task'=>$task,
-        'state' => 'updated'
-    ]);
+                                'id'    => $id,
+                                'task'  => $task,
+                                'state' => 'updated'
+                            ]);
     //return view('welcome');
 });
 
-
-
-
-
-
 Route::delete('tasks/{id}', 'Todo@delete')->where('id', '[0-9]+');
 
-
-Route::get('/tasks/get', function () {
-    $tasks = DB::table('tasks')->select('id','task')->get();
-    return response()->json($tasks);
-});
-
-
-Route::get('/tasks/get/{id}', function ($id) {
-    $task = DB::table('tasks')->select('id','task')->where('id',$id)->get();
-    return response()->json($task);
-
-});
+Route::get('/tasks/get/{id?}', 'Todo@get')->where('id', '[0-9]+');
 
 
