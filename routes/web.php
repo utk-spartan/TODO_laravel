@@ -12,13 +12,11 @@
 */
 //namespace App\Http\Kernel;
 
-Route::post('/tasks', function (\Illuminate\Http\Request $request) {
-    $task = $request->input('task');
-    $inserted=DB::insert('insert into tasks (id, task) values (?, ?)', [NULL, $task]);
 
-        return response()->json($inserted);
+Route::post('/tasks', 'PostsController@index');
 
-});
+
+
 
 Route::patch('/tasks/id',function (\Illuminate\Http\Request $request){
     //for updating task file
