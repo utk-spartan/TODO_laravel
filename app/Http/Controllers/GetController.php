@@ -2,11 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\Http\Controllers\Controller;
-
-use Illuminate\Http\Request;
-
 use App\GetModel;
 
 class GetController extends Controller
@@ -16,7 +11,7 @@ class GetController extends Controller
     {
         $tasks = new GetModel;
 
-        return response()->json($tasks->all());
+        return response()->json($tasks->getAllTasks());
     }
 
     public function get($id = null)
@@ -25,10 +20,8 @@ class GetController extends Controller
         {
             abort(404);
         }
-
         $tasks = new GetModel;
-        $task  = $tasks->findOrFail($id);
-        //TODO : ask
-        return response()->json($task->task);
+
+        return response()->json($tasks->getTask($id));
     }
 }

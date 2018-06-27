@@ -7,14 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 class GetModel extends Model
 {
     const TASK = 'task';
+
     protected $table = 'tasks';
+
     public $timestamps = false;
-    public function setTask(string $task)
+
+    public function getAllTasks()
     {
-        $this->setAttribute(self::TASK, $task);
+        return $this->all();
     }
-    public function getTask()
+
+    public function getTask($id)
     {
-        $this->getAttribute(self::TASK);
+        $task  = $this->findOrFail($id);
+        return $task->getAttribute(self::TASK);
     }
 }
