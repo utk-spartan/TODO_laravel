@@ -1,11 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\User;
-use App\Http\Controllers\Controller;
 use Validator;
-use App\Update;
+use App\Tasks;
 use Illuminate\Http\Request;
 
 
@@ -15,7 +12,6 @@ class UpdateController extends Controller
     public function update(Request $request,$id)
     {
         //for updating task file
-        //$id =  $request->input('id');
         $task =  $request->input('task');
         $validator = Validator::make($request->all(), [
             'task' => 'required|max:255',
@@ -23,7 +19,7 @@ class UpdateController extends Controller
         if($validator->fails()===true) {
             return response()->json(['state' => 'update operation failed']);
         }
-        $tasks = new Update;
+        $tasks = new Tasks;
 
         if(($tasks->updateTask($id,$task))===0)
         {

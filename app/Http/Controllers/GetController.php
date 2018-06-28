@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\GetModel;
+use App\Tasks;
 
 class GetController extends Controller
 {
 
     public function getall()
     {
-        $tasks = new GetModel;
+        $tasks = new Tasks;
 
         return response()->json($tasks->getAllTasks());
     }
@@ -20,7 +20,7 @@ class GetController extends Controller
         {
             abort(404);
         }
-        $tasks = new GetModel;
+        $tasks = new Tasks;
 
         return response()->json($tasks->getTask($id));
     }

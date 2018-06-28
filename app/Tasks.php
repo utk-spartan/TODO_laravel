@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tasks extends Model
 {
+    const TASK = 'task';
     protected $table = 'tasks';
-
+    public $timestamps = false;
     public function deleteTask($id)
     {
-        $message = "";
         $task = $this->Find($id);
 
         if ($task === NULL)
@@ -34,6 +34,28 @@ class Tasks extends Model
 
         return $message;
 
+    }
+
+    public function getAllTasks()
+    {
+        return $this->all();
+    }
+
+    public function getTask($id)
+    {
+        $task  = $this->findOrFail($id);
+        return $task->getAttribute(self::TASK);
+    }
+
+    public function setTask(string $task)
+    {
+        $this->setAttribute(self::TASK, $task);
+    }
+
+    public function updateTask($id,$task)
+    {
+        return self::where('id', $id)
+                   ->update(['task' => $task]);
     }
 
 }

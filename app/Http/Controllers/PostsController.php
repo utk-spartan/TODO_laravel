@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Post;
-use Illuminate\Http\Request;
+use App\Tasks;
 use Validator;
 use DB;
 
@@ -19,7 +18,7 @@ class PostsController extends Controller
         {
             return response()->json("task not valid");
         }
-        $post = new Post;
+        $post = new Tasks;
         $post->setTask($task);
         $post->save();
         $id = DB::getPdo()->lastInsertID();
